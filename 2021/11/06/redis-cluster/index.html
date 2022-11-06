@@ -20,30 +20,33 @@
     var CONFIG = {"hostname":"zhumang.github.io","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="竹芒的博客，关于技术，关于诗意">
-<meta property="og:type" content="website">
-<meta property="og:title" content="竹芒的故纸堆">
-<meta property="og:url" content="http://zhumang.github.io/index.html">
+  <meta name="description" content="Redis搭建集群准备工作 新版的redis已经支持搭建集群了，不需要在用ruby插件，简单上手 首先准备编译按章的前置环境并创建数据存储路径 12345apt-get updateapt-get install -y unzip build-essential tcl pkg-config &amp;&amp; apt-get autoremove -yuseradd -m -s &#x2F;usr&#x2F;sb">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 下搭建redis集群">
+<meta property="og:url" content="http://zhumang.github.io/2021/11/06/redis-cluster/index.html">
 <meta property="og:site_name" content="竹芒的故纸堆">
-<meta property="og:description" content="竹芒的博客，关于技术，关于诗意">
+<meta property="og:description" content="Redis搭建集群准备工作 新版的redis已经支持搭建集群了，不需要在用ruby插件，简单上手 首先准备编译按章的前置环境并创建数据存储路径 12345apt-get updateapt-get install -y unzip build-essential tcl pkg-config &amp;&amp; apt-get autoremove -yuseradd -m -s &#x2F;usr&#x2F;sb">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-06T00:53:12.000Z">
+<meta property="article:modified_time" content="2022-11-06T01:29:35.382Z">
 <meta property="article:author" content="竹芒">
+<meta property="article:tag" content="redis">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://zhumang.github.io/">
+<link rel="canonical" href="http://zhumang.github.io/2021/11/06/redis-cluster/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>竹芒的故纸堆</title>
+  <title>Linux 下搭建redis集群 | 竹芒的故纸堆</title>
   
 
 
@@ -168,9 +171,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -186,10 +190,9 @@
       <meta itemprop="name" content="竹芒的故纸堆">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/11/06/redis-cluster/" class="post-title-link" itemprop="url">Linux 下搭建redis集群</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Linux 下搭建redis集群
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -242,7 +245,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Redis搭建集群"><a href="#Redis搭建集群" class="headerlink" title="Redis搭建集群"></a>Redis搭建集群</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p> 新版的redis已经支持搭建集群了，不需要在用ruby插件，简单上手<br> 首先准备编译按章的前置环境并创建数据存储路径</p>
+        <h1 id="Redis搭建集群"><a href="#Redis搭建集群" class="headerlink" title="Redis搭建集群"></a>Redis搭建集群</h1><h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><p> 新版的redis已经支持搭建集群了，不需要在用ruby插件，简单上手<br> 首先准备编译按章的前置环境并创建数据存储路径</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">apt-get update</span><br><span class="line">apt-get install -y unzip build-essential tcl pkg-config &amp;&amp; apt-get autoremove -y</span><br><span class="line">useradd -m -s /usr/sbin/nologin redis</span><br><span class="line">mkdir -p /home/redis/data/7001 /home/redis/data/7002 /home/redis/data/7003 /home/redis/data/7004 /home/redis/data/7005 /home/redis/data/7006 /home/redis/log</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p> 编译安装redis,源文件可以直接在官网下载活着直接wget获取</p>
@@ -262,27 +265,33 @@
 
 <h2 id="默认配置文件示例"><a href="#默认配置文件示例" class="headerlink" title="默认配置文件示例"></a>默认配置文件示例</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">bind 0.0.0.0</span><br><span class="line">protected-mode yes</span><br><span class="line">port 6379</span><br><span class="line">tcp-backlog 511</span><br><span class="line">timeout 0</span><br><span class="line">tcp-keepalive 300</span><br><span class="line">daemonize yes</span><br><span class="line">pidfile /var/run/redis_6379.pid</span><br><span class="line">loglevel notice</span><br><span class="line">logfile /home/redis/log/6379.log</span><br><span class="line">databases 16</span><br><span class="line">always-show-logo no</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">set-proc-title <span class="built_in">yes</span></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">proc-title-template <span class="string">&quot;&#123;title&#125; &#123;listen-addr&#125; &#123;server-mode&#125;&quot;</span></span></span><br><span class="line">stop-writes-on-bgsave-error yes</span><br><span class="line">rdbcompression yes</span><br><span class="line">rdbchecksum yes</span><br><span class="line">dbfilename dump.rdb</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">rdb-del-sync-files no</span></span><br><span class="line">dir /home/redis/data/6379</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">masterauth</span></span><br><span class="line">replica-serve-stale-data yes</span><br><span class="line">replica-read-only yes</span><br><span class="line">repl-diskless-sync no</span><br><span class="line">repl-diskless-sync-delay 5</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">repl-diskless-load disabled</span></span><br><span class="line">repl-disable-tcp-nodelay no</span><br><span class="line">replica-priority 100</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">acllog-max-len 128</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">requirepass</span></span><br><span class="line">lazyfree-lazy-eviction no</span><br><span class="line">lazyfree-lazy-expire no</span><br><span class="line">lazyfree-lazy-server-del no</span><br><span class="line">replica-lazy-flush no</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lazyfree-lazy-user-del no</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">lazyfree-lazy-user-flush no</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">oom-score-adj no</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">oom-score-adj-values 0 200 800</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">disable-thp <span class="built_in">yes</span></span></span><br><span class="line">appendonly yes</span><br><span class="line">appendfilename &quot;appendonly.aof&quot;</span><br><span class="line">appendfsync everysec</span><br><span class="line">no-appendfsync-on-rewrite no</span><br><span class="line">auto-aof-rewrite-percentage 100</span><br><span class="line">auto-aof-rewrite-min-size 64mb</span><br><span class="line">aof-load-truncated yes</span><br><span class="line">aof-use-rdb-preamble yes</span><br><span class="line">lua-time-limit 5000</span><br><span class="line">cluster-enabled yes</span><br><span class="line">cluster-config-file /home/redis/data/6379/nodes-6379.conf</span><br><span class="line">cluster-node-timeout 15000</span><br><span class="line">slowlog-log-slower-than 10000</span><br><span class="line">slowlog-max-len 128</span><br><span class="line">latency-monitor-threshold 0</span><br><span class="line">notify-keyspace-events &quot;&quot;</span><br><span class="line">hash-max-ziplist-entries 512</span><br><span class="line">hash-max-ziplist-value 64</span><br><span class="line">list-max-ziplist-size -2</span><br><span class="line">list-compress-depth 0</span><br><span class="line">set-max-intset-entries 512</span><br><span class="line">zset-max-ziplist-entries 128</span><br><span class="line">zset-max-ziplist-value 64</span><br><span class="line">hll-sparse-max-bytes 3000</span><br><span class="line">stream-node-max-bytes 4096</span><br><span class="line">stream-node-max-entries 100</span><br><span class="line">activerehashing yes</span><br><span class="line">client-output-buffer-limit normal 0 0 0</span><br><span class="line">client-output-buffer-limit replica 256mb 64mb 60</span><br><span class="line">client-output-buffer-limit pubsub 32mb 8mb 60</span><br><span class="line">hz 10</span><br><span class="line">dynamic-hz yes</span><br><span class="line">aof-rewrite-incremental-fsync yes</span><br><span class="line">rdb-save-incremental-fsync yes</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">jemalloc-bg-thread <span class="built_in">yes</span></span></span><br></pre></td></tr></table></figure>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+          </div>
+
+        
+
+
+        
       </footer>
+    
   </article>
   
   
   
 
 
-  
-
-
 
           </div>
           
+    <div class="comments" id="valine-comments"></div>
 
 <script>
   window.addEventListener('tabs:register', () => {
@@ -329,6 +338,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Redis%E6%90%AD%E5%BB%BA%E9%9B%86%E7%BE%A4"><span class="nav-number">1.</span> <span class="nav-text">Redis搭建集群</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.2.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE"><span class="nav-number">1.3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E8%AE%BE%E7%BD%AE%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6-redis-conf-%E4%B8%BAredis%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">1.3.1.</span> <span class="nav-text">批量设置配置文件,redis.conf 为redis默认配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%B9%E9%87%8F%E7%BC%96%E8%BE%91%E5%90%84%E8%8A%82%E7%82%B9%E8%84%9A%E6%9C%AC"><span class="nav-number">1.3.2.</span> <span class="nav-text">批量编辑各节点脚本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E5%90%AF%E5%8A%A8%E9%A1%B9"><span class="nav-number">1.3.3.</span> <span class="nav-text">配置启动项</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%AE%E6%94%B9%E5%AF%86%E7%A0%81"><span class="nav-number">1.3.4.</span> <span class="nav-text">修改密码</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8"><span class="nav-number">1.4.</span> <span class="nav-text">启动</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%AF%E5%8A%A8%E5%90%84%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.1.</span> <span class="nav-text">启动各节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E8%8A%82%E7%82%B9"><span class="nav-number">1.4.2.</span> <span class="nav-text">创建节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%A4%BA%E4%BE%8B"><span class="nav-number">1.5.</span> <span class="nav-text">默认配置文件示例</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
