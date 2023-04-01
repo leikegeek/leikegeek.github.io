@@ -34,4 +34,42 @@
         <tag>database</tag>
       </tags>
   </entry>
+  <entry>
+    <title>基于obsidian做个人知识管理</title>
+    <url>/2023/03/06/obsidian/</url>
+    <content><![CDATA[<h2 id="笔记应该是怎样的"><a href="#笔记应该是怎样的" class="headerlink" title="笔记应该是怎样的"></a>笔记应该是怎样的</h2><p>从学生时代开始，我用过很多笔记软件，比如为知笔记，印象笔记，OneNote，语雀，思源，Notion等。有段时间我把各个软件都试用过一遍，最终也没能沉淀比较好的内容。所以本质不在于笔记工具，而在于我们用得顺不顺手，有没有给自己的知识管理带来价值。这些笔记功能都很强大，但是核心思想却千差万别，对于每个人而言记录维护好用着顺手就是最好的笔记。简单来说，个人认为笔记不能为了记录而记录。可以对自己的知识进行管理，形成循环，方便取用与输出。总之笔记应该能把知识管理起来。</p>
+<h2 id="知识管理"><a href="#知识管理" class="headerlink" title="知识管理"></a>知识管理</h2><p>1.以知识收集为目的<br>  我最早用Evernote就是这种，当时这个软件很火，配合chrome插件，各种信息资源意见就可以贴到软件上来，但是却没有太多的精力去整理和消化，相当于买了本书，但一直不看，却以为自己获得了知识。当然这不是这个软件的缺点，而是人的缺点<br>2.以知识整理为目的<br>   我用OneNote整理过笔记，各种笔记分门别类各种子目录加上不同颜色的标签，但是没能坚持下去。究其原因，还是人的问题。<br>3.以知识循环为目的<br>  实际上大部分笔记都是很碎片化的，这个时候整不整理就成了问题，因为整理这件事本身在很多时候一点都不急，有很多更重要的事情要处理，不整理吧，时间久了就丢在故纸堆里了。Obsidian提倡的是笔记优先原则，先记下来，打上标签和链接，在取用的过程中将知识组合然后输出。当然当碎片多了起来，整理线索也是比较让人头疼的事情了。这个我们可以用一个目录来维护各种进行到一半的事情，比如未完成的摘录，稍后要阅读的文档等，有空了就来消化这些待办。因为双向链接和标签的本质是建立连接和索引，当你连索引都不记得的时候（标签一直在那里，也可以通过查看标签列表查看，但是可能你不知道它关联的具体内容），这个信息就淹没在信息海洋里了。</p>
+<h2 id="Obsidian是什么"><a href="#Obsidian是什么" class="headerlink" title="Obsidian是什么"></a>Obsidian是什么</h2><p><code>Markdown编辑器</code>   够用，但不如Typora强大，但是可以通过各种插件弥补<br><code>文件夹式管理</code>  本地存放，不存在平台没了，要痛苦地转移数据<br><code>双向链接</code>  在A文章引用B文章，在B也能看到被引用，构建知识点之间的关联，形成知识网络，无须关注知识的层级，现在很多笔记软件都支持这个<br><code>卡片管理</code>  将碎片化的知识当作一个个小卡片进行管理，然后卡片之前通过链接形成关联，避免形成信息孤岛，在有空的时候再整理输出<br><code>插件市场</code> 丰俭由人，按需取用。不喜欢折腾的用基础功能就能完成笔记管理。喜欢折腾的可以搞各种花里胡哨的插件</p>
+<h3 id="Obsidian可以做什么"><a href="#Obsidian可以做什么" class="headerlink" title="Obsidian可以做什么"></a>Obsidian可以做什么</h3><ul>
+<li>markdown编辑器，当md编辑器及文件浏览器，也可以在笔记中关联pdf文件，方便随时查看原文</li>
+<li>关系图谱：通过关系图谱查看知识结构与连接</li>
+</ul>
+<h2 id="强大的插件"><a href="#强大的插件" class="headerlink" title="强大的插件"></a>强大的插件</h2><h3 id="插件安装"><a href="#插件安装" class="headerlink" title="插件安装"></a>插件安装</h3><p>在线：在第三方插件市场里面直接装，国内网络一般无法安装<br>离线：一般在github搜索相应的插件，下载安装包(一般有main.js manifest.son,styles.css三个文件，有些没有css文件)，在.obsidian&#x2F;pulgins文件夹下新建插件文件夹(eg: obsidian-table),把下载的三个插件文件放进去，重启obsidian后就能在设置&#x2F;第三方插件里面看到了。</p>
+<h3 id="插件使用"><a href="#插件使用" class="headerlink" title="插件使用"></a>插件使用</h3><h4 id="常用插件"><a href="#常用插件" class="headerlink" title="常用插件"></a>常用插件</h4><ul>
+<li>git 可以通过git插件</li>
+<li>kanban  任务看板</li>
+<li>day planner 日程规划，⚠️现在的插件有些问题，甘特图显示不了，需要修改源码的第6098行将mm改为m。另外用命令行模式要方便些，可以自定义文件存放的位置及文件名。但是记得在文件内容开头加上 <code>## day planner</code>  这样插件才能识别</li>
+<li>calendar 日历展示，关联日记</li>
+<li>advanced Tables 表格编辑辅助</li>
+<li>syntax highlight 代码高亮显示</li>
+<li>excalidraw 手绘风格画图</li>
+<li>charts 图表插件</li>
+<li>templater 自动化管理模板</li>
+<li>annotator  pdf阅读扩展</li>
+<li>obsidian-encrypt 加密文件</li>
+<li>mind map 思维导图</li>
+<li>pandoc 以各种格式的文件导出笔记</li>
+<li>privacy-glasses 可以模糊当前页面，避免隐私暴露</li>
+<li>dataview   高级插件，通过特定的语法管理搜索笔记<br>以上，插件均能在github上下载并找到使用方法，有些问题需要自己处理的已经标明。<br>总之，ob的插件很丰富，几乎可以满足所以的需求，如果满足不了，也可以自己去开发。</li>
+</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>虽说磨刀不误砍柴工，但是过于关注刀和磨刀石，也容易让人把过多的精力放在打造一把好看的刀上而忘记了砍柴。对于软件工具也是这样的，一款有着新的理念的软件确实让人眼前一亮，也容易让人高估工具的价值，而ob还有海量的插件，就容易让人眼前一直亮而忘记了知识管理和笔记这件事情的本身。所以还是建议先从最基础的功能和必需插件先用起来，确实有助于总结沉淀只是提高生产力才是本质。甚至你本身已有比较好的习惯和用得称手的软件也不必因为一两个新的概念而切换到这里。至于这个软件里面的定制主题，个性化字体，每日一言等等这些花里胡哨的插件看个人喜好，最开始使用不建议浪费时间去处理。</p>
+<p>参考文献：<a href="https://forum-zh.obsidian.md/">https://forum-zh.obsidian.md</a><br>        <a href="https://publish.obsidian.md/chinesehelp">https://publish.obsidian.md/chinesehelp</a></p>
+]]></content>
+      <categories>
+        <category>技术笔记</category>
+      </categories>
+      <tags>
+        <tag>obsidian</tag>
+      </tags>
+  </entry>
 </search>
